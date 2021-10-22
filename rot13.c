@@ -1,5 +1,6 @@
 #include<stdio.h>
 #include<stdbool.h>
+#include<string.h>
 bool input_key(){
 	char *input;
 	char *key = "rot13"; 
@@ -61,6 +62,48 @@ char ch_to_rot13 ( char ch ){
 	}
 
 	return rot13;
+}
+
+char *s_to_rot13 ( char *s1 ){
+	char *s2;
+	s2 = (char *) malloc ((strlen(s1)+1) * sizeof(char));
+	
+	while(*s1 != '\0'){
+		*s2 = ch_to_rot13 ( *s1 );
+		s1++;
+		s2++;
+	}
+	*s2 = '\0';
+	return s2;
+}
+
+void handle ( char *input_filename, char *output_filename ){
+	FILE *input;
+	FILE *output;
+	
+	input = fopen ( input_filename, "rt" );
+	if ( !input )
+	{
+	printf ( "\n" );
+	printf ( "ROT13::HANDLE - Fatal error!\n" );
+	printf ( "  Cannot open the input file \"%s\".\n", input_filename );
+	exit ( 1 );
+	}
+	
+	output = fopen ( output_filename, "wt" );
+	if ( !output ) 
+	{
+	printf ( "\n" );
+	printf ( "ROT13::HANDLE - Fatal error!\n" );
+	printf ( "  Cannot open the output file \"%s\".\n", output_filename );
+	exit ( 1 );
+	}
+	
+	char *c1 = getc ( input );
+	char *c2 = s_to_rot13 ( c1 );
+	putc ( c2, output );
+	fclose ( input );
+	fclose ( output );
 }
 
 int main(){
