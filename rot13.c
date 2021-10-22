@@ -58,16 +58,6 @@ char ch_to_rot13 ( char ch ) {
 }
 
 char *s_to_rot13 ( char *s1 ) {
-//	char *s2;
-//	s2 = (char *) malloc ((strlen(s1)+1) * sizeof(char));
-//
-//	while(*s1 != '\0') {
-//		*s2 = ch_to_rot13 ( *s1 );
-//		s1++;
-//		s2++;
-//	}
-//	*s2 = '\0';
-//	return s2;
 	int s_len;
 	char *s2;
 	char *c2;
@@ -107,11 +97,6 @@ void handle ( char *input_filename, char *output_filename ) {
 		return;
 	}
 
-//	char *c1 = getc ( input );
-//	char *c2 = s_to_rot13 ( c1 );
-//	putc ( c2, output );
-//	fclose ( input );
-//	fclose ( output );
 	while ( true ) {
 		char c1 = getc ( input );
 		if ( c1 == EOF ) {
