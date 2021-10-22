@@ -11,6 +11,58 @@ bool input_key(){
 	}
 }
 
+char ch_to_rot13 ( char ch ){
+	char rot13;
+	/*
+	[0:4] -> [5:9]
+	*/
+	if ( '0' <= ch && ch <= '4' )
+	{
+	rot13 = ch + 5;
+	}
+	/*
+	[5:9] -> [0:4]
+	*/
+	else if ( '5' <= ch && ch <= '9' )
+	{
+	rot13 = ch - 5;
+	}
+	/*
+	[A:M] -> [N:Z]
+	*/
+	else if ( 'A' <= ch && ch <= 'M' )
+	{
+	rot13 = ch + 13;
+	}
+	/*
+	[N:Z] -> [A:M]
+	*/
+	else if ( 'N' <= ch && ch <= 'Z' )
+	{
+	rot13 = ch - 13;
+	}
+	/*
+	[a:m] -> [n:z]
+	*/
+	else if ( 'a' <= ch && ch <= 'm' )
+	{
+	rot13 = ch + 13;
+	}
+	/*
+	[n:z] -> [a:m]
+	*/
+	else if ( 'n' <= ch && ch <= 'z' )
+	{
+	rot13 = ch - 13;
+	}
+	else
+	{
+	rot13 = ch;
+	}
+
+	return rot13;
+}
+
 int main(){
 
 	char input_filename[512];
@@ -28,4 +80,6 @@ int main(){
 	
 	scanf ( "%s", input_filename );
 	output_filename = s_to_rot13 ( input_filename );
+	handle ( input_filename, output_filename );
+	
 }
